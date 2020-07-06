@@ -1,5 +1,8 @@
 package br.com.loja.models;
 
+import java.util.List;
+
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -14,6 +17,9 @@ public class Produto {
 	private String nome;
 	private String marca;
 	private String descricao;
+	private TipoPreco tipo;
+	@ElementCollection
+	private List<Preco> precos;
 	
 	
 	public Long getId() {
@@ -42,7 +48,19 @@ public class Produto {
 		this.descricao = descricao;
 	}
 	
+	public TipoPreco getTipo() {
+		return tipo;
+	}
+	public void setTipo(TipoPreco tipo) {
+		this.tipo = tipo;
+	}
 	
+	public List<Preco> getPrecos() {
+		return precos;
+	}
+	public void setPrecos(List<Preco> precos) {
+		this.precos = precos;
+	}
 	@Override
 	public String toString() {
 		return "Produto [nome=" + nome + ", marca=" + marca + ", descricao=" + descricao + "]";
