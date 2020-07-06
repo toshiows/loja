@@ -1,8 +1,11 @@
 package br.com.loja.controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.com.loja.daos.ProdutoDAO;
@@ -22,11 +25,20 @@ public class ProdutosController {
 		return mv;
 	}
 	
-	@RequestMapping("/produtos")
+	@RequestMapping(value="/produtos", method=RequestMethod.POST)
 	public String gravar(Produto produto) {
 		
 		dao.gravar(produto);
 		return "produtos/ok";
+	}
+	
+	@RequestMapping(value="/produtos", method=RequestMethod.GET)
+	public ModelAndView listar() {
+		ModelAndView mv = new ModelAndView("produtos/lista");
+		List<Produto> produtos = dao.listar();
+		mv.addObject("produtos", produtos);
+		
+		return mv;
 	}
 	
 	
