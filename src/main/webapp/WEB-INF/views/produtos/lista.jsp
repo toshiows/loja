@@ -8,6 +8,8 @@
 <title>Lista de Produtos</title>
 </head>
 <body>
+	<h1>Lista de produtos</h1>
+	<div style="color: green;">${sucesso}</div>
 	<table>
 		<tr>
 			<th>ID</th>
