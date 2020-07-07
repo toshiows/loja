@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="s" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,14 +10,16 @@
 <title>Formulário de cadastro de produtos</title>
 </head>
 <body>
-	<form action="/loja/produtos" method="post">
+	<form:form action="${s:mvcUrl('PC#gravar').build()}" method="post" commandName="produto">
 		<div>
 			<label>Nome</label>
 			<input type="text" name="nome"/>
+			<form:errors path="nome" />
 		</div>
 		<div>
 			<label>Marca</label>
 			<input type="text" name="marca">
+			<form:errors path="marca" />
 		</div>
 		<div>
 			<label>Descrição</label>
@@ -31,6 +35,6 @@
 		<div>
 			<input type="submit" value="Cadastrar">
 		</div>
-	</form>
+	</form:form>
 </body>
 </html>
