@@ -20,8 +20,10 @@ public class FileSaver {
 			String realPath = request.getServletContext().getRealPath("/" + baseFolder);
 			String path = realPath + "/" + file.getOriginalFilename();
 			file.transferTo(new File(path));
+			String local = baseFolder + "/" + file.getOriginalFilename();
+			System.out.println(local);
 			
-			return baseFolder + "/" + file.getOriginalFilename();
+			return local;
 		}
 		catch(Exception e) {
 			throw new RuntimeException(e);

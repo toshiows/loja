@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
@@ -50,7 +51,7 @@ public class ProdutosController {
 			return form(produto);
 		}
 		
-		String path = fileSaver.write("arquivos-loja", arquivo);
+		String path = fileSaver.write("resources/imagens", arquivo);
 		produto.setArquivoPath(path);
 		
 		ModelAndView mv = new ModelAndView("redirect:produtos");
@@ -67,6 +68,16 @@ public class ProdutosController {
 		mv.addObject("produtos", produtos);
 		
 		return mv;
+	}
+	
+	@RequestMapping("/detalhe/{id}")
+	public ModelAndView detalhe(@PathVariable("id") Long id) {
+		ModelAndView mv = new ModelAndView("produtos/detalhe");
+		Produto produto = dao.find(id);
+		mv.addObject("produto", produto);
+		
+		return mv;
+		
 	}
 	
 	
