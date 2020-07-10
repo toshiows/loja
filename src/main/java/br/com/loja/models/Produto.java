@@ -1,5 +1,6 @@
 package br.com.loja.models;
 
+import java.math.BigDecimal;
 import java.util.Calendar;
 import java.util.List;
 
@@ -23,7 +24,6 @@ public class Produto {
 	private String arquivoPath;
 	@DateTimeFormat
 	private Calendar dataValidade;
-	private TipoPreco tipo;
 	@ElementCollection
 	private List<Preco> precos;
 	
@@ -54,13 +54,6 @@ public class Produto {
 		this.descricao = descricao;
 	}
 	
-	public TipoPreco getTipo() {
-		return tipo;
-	}
-	public void setTipo(TipoPreco tipo) {
-		this.tipo = tipo;
-	}
-	
 	public List<Preco> getPrecos() {
 		return precos;
 	}
@@ -79,10 +72,46 @@ public class Produto {
 	public void setArquivoPath(String arquivoPath) {
 		this.arquivoPath = arquivoPath;
 	}
+	
+	public BigDecimal precoPara(TipoPreco tipoPreco) {
+		return precos.stream()
+				.filter(preco -> preco.getTipoPreco().equals(tipoPreco))
+				.findFirst().get().getPreco();
+	}
+	
+	
 	@Override
 	public String toString() {
 		return "Produto [nome=" + nome + ", marca=" + marca + ", descricao=" + descricao + "]";
 	}
+	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		return result;
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Produto other = (Produto) obj;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		return true;
+	}
+	
+
+	
+
 
 	
 }
