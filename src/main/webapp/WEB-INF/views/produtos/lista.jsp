@@ -11,6 +11,7 @@
 <body>
 	<h1>Lista de produtos</h1>
 	<div style="color: green;">${sucesso}</div>
+	<div style="color: red;">${falha}</div>
 	<table>
 		<tr>
 			<th>ID</th>

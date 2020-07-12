@@ -1,9 +1,13 @@
 package br.com.loja.models;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
-public class ItemDoCarrinho {
+public class ItemDoCarrinho implements Serializable{
 
+	
+	
+	private static final long serialVersionUID = 1L;
 	
 	private Produto produto;
 	private TipoPreco tipoPreco;
